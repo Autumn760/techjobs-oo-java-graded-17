@@ -17,13 +17,41 @@ public class Job {
     //  other five fields. The second constructor should also call the first in order to initialize
     //  the 'id' field.
 
+    public Job() {
+        id = nextId;
+        nextId++;
+    }
 
-    // TODO: Add custom equals and hashCode methods. Consider two Job objects "equal" when their id fields
+    public Job(String name, Employer employer, Location location, PositionType positionType, CoreCompetency coreCompetency) {
+        this();
+        this.name = name;
+        this.employer = employer;
+        this.location = location;
+        this.positionType = positionType;
+        this.coreCompetency = coreCompetency;
+    }
+
+// TODO: Add custom equals and hashCode methods. Consider two Job objects "equal" when their id fields
     //  match.
+    @Override
+    public int hashCode() {
+        return (id);
+    }
+
+    @Override
+    public boolean equals(Object toBeCompared1) {
+        if (this == toBeCompared1)
+            return true;
+        if (toBeCompared1 == null || getClass() != toBeCompared1.getClass())
+            return false;
+
+        Job otherJob = (Job) toBeCompared1;
+
+        return id == otherJob.id;
+    }
 
     // TODO: Add getters for each field EXCEPT nextId. Add setters for each field EXCEPT nextID
-    //  and id.(Done)
-
+    //  and id.
 
     public int getId() {
         return id;
