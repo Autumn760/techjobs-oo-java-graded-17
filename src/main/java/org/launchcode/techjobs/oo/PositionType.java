@@ -22,16 +22,23 @@ public class PositionType {
         return value;
     }
     // TODO: Add custom equals and hashCode methods. Consider two PositionType objects "equal" when
-    //  their id fields match.
+    //  their id fields match.(Get help, if can't figure out).
 
     @Override
     public int hashCode() {
-        return super.hashCode();
+        return (id);
     }
 
     @Override
-    public boolean equals(Object obj) {
-        return super.equals(obj);
+    public boolean equals(Object toBeCompared) {
+        if (this == toBeCompared)
+            return true;
+        if (toBeCompared == null || getClass() != toBeCompared.getClass())
+            return false;
+
+        PositionType otherPositionType = (PositionType) toBeCompared;
+
+        return id == otherPositionType.id;
     }
 
     // Getters and Setters:
