@@ -44,6 +44,43 @@ public class JobTest {
         assertFalse(job1.equals(job2));
     }
 
+    @Test
+    public void testToStringStartsAndEndsWithNewLine() {
+        Job job1 = new Job("Software Developer", new Employer("TechCo"), new Location("City"), new PositionType("Full-time"), new CoreCompetency("Java"));
+
+        String jobString = job1.toString();
+
+        assertEquals(System.lineSeparator(), jobString.substring(0, System.lineSeparator().length())); // Check for leading new line
+        assertEquals(System.lineSeparator(), jobString.substring(jobString.length() - System.lineSeparator().length())); // Check for trailing new line
+    }
+    @Test
+    public void testToStringContainsCorrectLabelsAndData() {
+        Job job = new Job("Software Developer", new Employer("TechCo"), new Location("City"), new PositionType("Full-time"), new CoreCompetency("Java"));
+
+        String jobString = job.toString();
+
+        // Check if the labels and data are present in the string
+        assertTrue(jobString.contains("ID: " + job.getId()));
+        assertTrue(jobString.contains("Name: " + job.getName()));
+        assertTrue(jobString.contains("Employer: " + job.getEmployer()));
+        assertTrue(jobString.contains("Location: " + job.getLocation()));
+        assertTrue(jobString.contains("Position Type: " + job.getPositionType()));
+        assertTrue(jobString.contains("Core Competency: " + job.getCoreCompetency()));
+    }
+
+    @Test
+    public void testToStringHandlesEmptyField() {
+        Job job = new Job("", new Employer("TechCo"), new Location("City"), new PositionType("Full-time"), new CoreCompetency("Java"));
+
+        String jobString = job.toString();
+
+        assertTrue(jobString.contains("Name: Data not available")); // Check if Name is empty
+        assertFalse(jobString.contains("Employer: Data not available")); // Check if Employer is not empty
+        assertFalse(jobString.contains("Location: Data not available")); // Check if Location is not empty
+        assertFalse(jobString.contains("Position Type: Data not available")); // Check if Position Type is not empty
+        assertFalse(jobString.contains("Core Competency: Data not available")); // Check if Core Competency is not empty
+    }
+
 }
 
 

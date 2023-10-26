@@ -2,7 +2,7 @@ package org.launchcode.techjobs.oo;
 
 import java.util.Objects;
 
-public class Job {
+public class Job extends JobField{
 
     private int id;
     private static int nextId = 1;
@@ -31,6 +31,7 @@ public class Job {
         this.coreCompetency = coreCompetency;
     }
 
+
 // TODO: Add custom equals and hashCode methods. Consider two Job objects "equal" when their id fields
     //  match.
     @Override
@@ -49,6 +50,25 @@ public class Job {
 
         return id == otherJob.id;
     }
+
+    @Override
+    public String toString() {
+        return System.lineSeparator() +
+                "ID: " + getId() + System.lineSeparator() +
+                "Name: " + getFieldValueOrNotAvailable(getName()) + System.lineSeparator() +
+                "Employer: " + getFieldValueOrNotAvailable(getEmployer().getValue()) + System.lineSeparator() +
+                "Location: " + getFieldValueOrNotAvailable(getLocation().getValue()) + System.lineSeparator() +
+                "Position Type: " + getFieldValueOrNotAvailable(getPositionType().getValue()) + System.lineSeparator() +
+                "Core Competency: " + getFieldValueOrNotAvailable(getCoreCompetency().getValue()) + System.lineSeparator();
+    }
+
+    private String getFieldValueOrNotAvailable(String field) {
+        if (field == null || field.trim().isEmpty()) {
+            return "Data not available";
+        }
+        return field;
+    }
+
 
     // TODO: Add getters for each field EXCEPT nextId. Add setters for each field EXCEPT nextID
     //  and id.
